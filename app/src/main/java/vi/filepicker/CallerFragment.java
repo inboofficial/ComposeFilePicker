@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -16,7 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import droidninja.filepicker.FilePickerBuilder;
+import droidninja.filepicker.FilePicker;
 import droidninja.filepicker.FilePickerConst;
 import droidninja.filepicker.fragments.BaseFragment;
 
@@ -39,6 +42,34 @@ public class CallerFragment extends BaseFragment implements EasyPermissions.Perm
   private int MAX_ATTACHMENT_COUNT = 10;
   private ArrayList<Uri> photoPaths = new ArrayList<>();
   private ArrayList<Uri> docPaths = new ArrayList<>();
+
+  ActivityResultLauncher<Intent> pickPhotoResultLauncher = registerForActivityResult(
+          new ActivityResultContracts.StartActivityForResult(),
+          result -> {
+            if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+              ArrayList<Uri> dataList = result.getData().getParcelableArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA);
+              if (dataList != null) {
+                photoPaths = new ArrayList<>();
+                photoPaths.addAll(dataList);
+              }
+            }
+            addThemToView(photoPaths, docPaths);
+          }
+  );
+
+  ActivityResultLauncher<Intent> pickDocResultLauncher = registerForActivityResult(
+          new ActivityResultContracts.StartActivityForResult(),
+          result -> {
+            if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+              ArrayList<Uri> dataList = result.getData().getParcelableArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS);
+              if (dataList != null) {
+                docPaths = new ArrayList<>();
+                docPaths.addAll(dataList);
+              }
+            }
+            addThemToView(photoPaths, docPaths);
+          }
+  );
 
   public CallerFragment() {
     // Required empty public constructor
@@ -93,32 +124,6 @@ public class CallerFragment extends BaseFragment implements EasyPermissions.Perm
     }
   }
 
-  @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    switch (requestCode) {
-      case FilePickerConst.REQUEST_CODE_PHOTO:
-        if (resultCode == Activity.RESULT_OK && data != null) {
-          ArrayList<Uri> dataList = data.getParcelableArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA);
-          if(dataList != null) {
-            photoPaths = new ArrayList<Uri>();
-            photoPaths.addAll(dataList);
-          }
-        }
-        break;
-
-      case FilePickerConst.REQUEST_CODE_DOC:
-        if (resultCode == Activity.RESULT_OK && data != null) {
-          ArrayList<Uri> dataList = data.getParcelableArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA);
-          if(dataList != null) {
-            docPaths = new ArrayList<>();
-            docPaths.addAll(dataList);
-          }
-        }
-        break;
-    }
-
-    addThemToView(photoPaths, docPaths);
-  }
-
   private void addThemToView(ArrayList<Uri> imagePaths, ArrayList<Uri> docPaths) {
     ArrayList<Uri> filePaths = new ArrayList<>();
     if (imagePaths != null) filePaths.addAll(imagePaths);
@@ -162,7 +167,7 @@ public class CallerFragment extends BaseFragment implements EasyPermissions.Perm
       Toast.makeText(getActivity(), "Cannot select more than " + MAX_ATTACHMENT_COUNT + " items",
           Toast.LENGTH_SHORT).show();
     } else {
-      FilePickerBuilder.Companion.getInstance()
+      FilePicker.Companion.builder(pickPhotoResultLauncher)
           .setMaxCount(maxCount)
           .setSelectedFiles(photoPaths)
           .setActivityTheme(R.style.FilePickerTheme)
@@ -176,7 +181,7 @@ public class CallerFragment extends BaseFragment implements EasyPermissions.Perm
       Toast.makeText(getActivity(), "Cannot select more than " + MAX_ATTACHMENT_COUNT + " items",
           Toast.LENGTH_SHORT).show();
     } else {
-      FilePickerBuilder.Companion.getInstance()
+      FilePicker.Companion.builder(pickDocResultLauncher)
           .setMaxCount(maxCount)
           .setSelectedFiles(docPaths)
           .enableDocSupport(true)
