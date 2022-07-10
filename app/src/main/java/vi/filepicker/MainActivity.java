@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -19,7 +21,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import droidninja.filepicker.FilePickerBuilder;
+import droidninja.filepicker.FilePicker;
 import droidninja.filepicker.FilePickerConst;
 import droidninja.filepicker.models.sort.SortingTypes;
 import droidninja.filepicker.utils.ContentUriUtils;
@@ -36,22 +38,40 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     private ArrayList<Uri> photoPaths = new ArrayList<>();
     private ArrayList<Uri> docPaths = new ArrayList<>();
 
+    ActivityResultLauncher<Intent> pickPhotoResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    ArrayList<Uri> dataList = result.getData().getParcelableArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA);
+                    if (dataList != null) {
+                        photoPaths = new ArrayList<>();
+                        photoPaths.addAll(dataList);
+                    }
+                }
+                addThemToView(photoPaths, docPaths);
+            }
+    );
+
+    ActivityResultLauncher<Intent> pickDocResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    ArrayList<Uri> dataList = result.getData().getParcelableArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS);
+                    if (dataList != null) {
+                        docPaths = new ArrayList<>();
+                        docPaths.addAll(dataList);
+                    }
+                }
+                addThemToView(photoPaths, docPaths);
+            }
+    );
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.pick_photo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pickPhotoClicked();
-            }
-        });
-        findViewById(R.id.pick_doc).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pickDocClicked();
-            }
-        });
+        findViewById(R.id.pick_photo).setOnClickListener(view -> pickPhotoClicked());
+        findViewById(R.id.pick_doc).setOnClickListener(view -> pickDocClicked());
     }
 
     @AfterPermissionGranted(RC_PHOTO_PICKER_PERM)
@@ -76,33 +96,6 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case CUSTOM_REQUEST_CODE:
-                if (resultCode == Activity.RESULT_OK && data != null) {
-                    ArrayList<Uri> dataList = data.getParcelableArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA);
-                    if (dataList != null) {
-                        photoPaths = new ArrayList<Uri>();
-                        photoPaths.addAll(dataList);
-                    }
-                }
-                break;
-
-            case FilePickerConst.REQUEST_CODE_DOC:
-                if (resultCode == Activity.RESULT_OK && data != null) {
-                    ArrayList<Uri> dataList = data.getParcelableArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS);
-                    if (dataList != null) {
-                        docPaths = new ArrayList<>();
-                        docPaths.addAll(dataList);
-                    }
-                }
-                break;
-        }
-
-        addThemToView(photoPaths, docPaths);
-    }
 
     private void addThemToView(ArrayList<Uri> imagePaths, ArrayList<Uri> docPaths) {
         ArrayList<Uri> filePaths = new ArrayList<>();
@@ -146,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             Toast.makeText(this, "Cannot select more than " + MAX_ATTACHMENT_COUNT + " items",
                     Toast.LENGTH_SHORT).show();
         } else {
-            FilePickerBuilder.getInstance()
+            FilePicker.builder(pickPhotoResultLauncher)
                     .setMaxCount(10)
                     .setSelectedFiles(photoPaths) //this is optional
                     .setActivityTheme(R.style.FilePickerTheme)
@@ -163,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                     .enableImagePicker(true)
                     .setCameraPlaceholder(R.drawable.custom_camera)
                     .withOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                    .pickPhoto(this, CUSTOM_REQUEST_CODE);
+                    .pickPhoto(this);
         }
     }
 
@@ -175,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             Toast.makeText(this, "Cannot select more than " + MAX_ATTACHMENT_COUNT + " items",
                     Toast.LENGTH_SHORT).show();
         } else {
-            FilePickerBuilder.getInstance()
+            FilePicker.builder(pickDocResultLauncher)
                     .setMaxCount(1)
                     .setSelectedFiles(docPaths)
                     .setActivityTheme(R.style.FilePickerTheme)
