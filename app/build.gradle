@@ -7,7 +7,7 @@ android {
     buildToolsVersion '30.0.3'
 
     defaultConfig {
-        applicationId "vi.filepicker"
+        applicationId "ir.inbo.examples.filepicker"
         minSdkVersion 17
         targetSdkVersion 32
         versionCode 1

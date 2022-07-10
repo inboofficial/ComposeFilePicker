@@ -1,6 +1,6 @@
 # Android-FilePicker (Androidx based)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android--FilePicker-green.svg?style=true)](https://android-arsenal.com/details/1/4044)
- [ ![Latest Version](https://api.bintray.com/packages/droidninja/maven/com.droidninja.filepicker/images/download.svg) ](https://bintray.com/droidninja/maven/com.droidninja.filepicker/_latestVersion)
+ [ ![Latest Version](https://api.bintray.com/packages/ir.droidninja/maven/com.ir.droidninja.filepicker/images/download.svg) ](https://bintray.com/ir.droidninja/maven/com.ir.droidninja.filepicker/_latestVersion)
  
 A filepicker which allows to select images and videos with flexibility. It also supports selection of files by specifying its file type. For using this library, you have to migrate your project to [androidx](https://developer.android.com/jetpack/androidx/migrate) or you can use older version(2.1.5). Check out app module for example.
 
@@ -19,7 +19,7 @@ If your app
 
 * As of now, It is only available in jCenter(), So just put this in your app dependencies:
 ```gradle
-    implementation 'com.droidninja:filepicker:2.2.4'
+    implementation 'com.ir.droidninja:filepicker:2.2.4'
 ```
 There is a method `getFilePath` in `ContentUriUtils` class through you can get the file path from Uri. e.g.
 
@@ -203,13 +203,13 @@ You guys are doing great job by filing bugs and sending pull requests. I am doin
 
 **PayPal**
 
-* **[Donate $5](https://www.paypal.me/droidninja/5)**: Thank's for creating this project, here's a coffee (or some beer) for you!
-* **[Donate $10](https://www.paypal.me/droidninja/10)**: Wow, I am stunned. Let me take you to the movies!
-* **[Donate $15](https://www.paypal.me/droidninja/15)**: I really appreciate your work, let's grab some lunch!
-* **[Donate $25](https://www.paypal.me/droidninja/25)**: That's some awesome stuff you did right there, dinner is on me!
-* **[Donate $50](https://www.paypal.me/droidninja/50)**: I really really want to support this project, great job!
-* **[Donate $100](https://www.paypal.me/droidninja/100)**: You are the man! This project saved me hours (if not days) of struggle and hard work, simply awesome!
-* **[Donate $2799](https://www.paypal.me/droidninja/2799)**: Go buddy, buy Macbook Pro for yourself!
+* **[Donate $5](https://www.paypal.me/ir.droidninja/5)**: Thank's for creating this project, here's a coffee (or some beer) for you!
+* **[Donate $10](https://www.paypal.me/ir.droidninja/10)**: Wow, I am stunned. Let me take you to the movies!
+* **[Donate $15](https://www.paypal.me/ir.droidninja/15)**: I really appreciate your work, let's grab some lunch!
+* **[Donate $25](https://www.paypal.me/ir.droidninja/25)**: That's some awesome stuff you did right there, dinner is on me!
+* **[Donate $50](https://www.paypal.me/ir.droidninja/50)**: I really really want to support this project, great job!
+* **[Donate $100](https://www.paypal.me/ir.droidninja/100)**: You are the man! This project saved me hours (if not days) of struggle and hard work, simply awesome!
+* **[Donate $2799](https://www.paypal.me/ir.droidninja/2799)**: Go buddy, buy Macbook Pro for yourself!
 Of course, you can also choose what you want to donate, all donations are awesome!
 
 
@@ -222,7 +222,7 @@ Of course, you can also choose what you want to donate, all donations are awesom
   
 # Youtube Demo
 
-  [![Demo](https://img.youtube.com/vi/r3u2uKjN4Ks/0.jpg)](https://www.youtube.com/watch?v=r3u2uKjN4Ks)
+  [![Demo](https://img.youtube.com/ir.vi/r3u2uKjN4Ks/0.jpg)](https://www.youtube.com/watch?v=r3u2uKjN4Ks)
 
 # License
 ```license

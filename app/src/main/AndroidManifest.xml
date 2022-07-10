@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="vi.filepicker">
+    package="ir.inbo.examples.filepicker">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".AppDelegate"
+        android:name="ir.inbo.examples.filepicker.AppDelegate"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -23,7 +23,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="vi.filepicker"
+            android:authorities="ir.inbo.libs.filepicker"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
