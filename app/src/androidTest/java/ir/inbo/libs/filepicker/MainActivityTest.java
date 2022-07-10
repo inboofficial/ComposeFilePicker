@@ -5,7 +5,9 @@ import android.os.Build;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
-import droidninja.filepicker.FilePickerActivity;
+import ir.inbo.examples.filepicker.MainActivity;
+import ir.inbo.examples.filepicker.R;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -22,9 +24,6 @@ import static org.hamcrest.Matchers.allOf;
 import static org.junit.Assert.assertNotNull;
 import static ir.inbo.libs.filepicker.RecyclerViewItemCountAssertion.withItemCount;
 
-/**
- * Created by droidNinja on 23/02/18.
- */
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
 

@@ -63,7 +63,7 @@
         tools:text="1.2MB" />
 
 
-    <droidninja.filepicker.views.SmoothCheckBox
+    <ir.inbo.libs.filepicker.views.SmoothCheckBox
         android:id="@+id/checkbox"
         style="@style/SmoothCheckBoxStyle"
         android:layout_width="@dimen/file_item_checkbox_size"
