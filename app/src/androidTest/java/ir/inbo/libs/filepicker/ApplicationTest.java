@@ -1,4 +1,4 @@
-package vi.filepicker;
+package ir.inbo.libs.filepicker;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

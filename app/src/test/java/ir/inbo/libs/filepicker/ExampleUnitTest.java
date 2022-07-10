@@ -1,4 +1,4 @@
-package vi.filepicker;
+package ir.inbo.libs.filepicker;
 
 import org.junit.Test;
 

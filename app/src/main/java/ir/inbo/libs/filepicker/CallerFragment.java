@@ -1,4 +1,4 @@
-package vi.filepicker;
+package ir.inbo.libs.filepicker;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.os.Bundle;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,13 +31,12 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
-import static vi.filepicker.MainActivity.RC_FILE_PICKER_PERM;
-import static vi.filepicker.MainActivity.RC_PHOTO_PICKER_PERM;
+import static ir.inbo.libs.filepicker.MainActivity.RC_FILE_PICKER_PERM;
+import static ir.inbo.libs.filepicker.MainActivity.RC_PHOTO_PICKER_PERM;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class CallerFragment extends BaseFragment implements EasyPermissions.PermissionCallbacks {
+
   private int MAX_ATTACHMENT_COUNT = 10;
   private ArrayList<Uri> photoPaths = new ArrayList<>();
   private ArrayList<Uri> docPaths = new ArrayList<>();

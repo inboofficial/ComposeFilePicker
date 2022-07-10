@@ -1,4 +1,4 @@
-package vi.filepicker;
+package ir.inbo.libs.filepicker;
 
 import android.app.Instrumentation;
 import android.os.Build;
@@ -20,7 +20,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.allOf;
 import static org.junit.Assert.assertNotNull;
-import static vi.filepicker.RecyclerViewItemCountAssertion.withItemCount;
+import static ir.inbo.libs.filepicker.RecyclerViewItemCountAssertion.withItemCount;
 
 /**
  * Created by droidNinja on 23/02/18.

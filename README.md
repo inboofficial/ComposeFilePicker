@@ -222,7 +222,7 @@ Of course, you can also choose what you want to donate, all donations are awesom
   
 # Youtube Demo
 
-  [![Demo](https://img.youtube.com/vi/r3u2uKjN4Ks/0.jpg)](https://www.youtube.com/watch?v=r3u2uKjN4Ks)
+  [![Demo](https://img.youtube.com/ir.vi/r3u2uKjN4Ks/0.jpg)](https://www.youtube.com/watch?v=r3u2uKjN4Ks)
 
 # License
 ```license
