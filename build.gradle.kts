@@ -4,6 +4,13 @@ buildscript {
         google()
         jcenter()
         mavenCentral()
+        maven {
+            url = uri("https://inbo.jfrog.io/artifactory/inbo-public-repo/")
+            credentials {
+                username = properties["artifactory_username"] as String
+                password = properties["artifactory_password"] as String
+            }
+        }
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.2.1")
@@ -18,7 +25,15 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
         maven(url = "https://maven.google.com")
+        maven {
+            url = uri("https://inbo.jfrog.io/artifactory/inbo-public-repo/")
+            credentials {
+                username = properties["artifactory_username"] as String
+                password = properties["artifactory_password"] as String
+            }
+        }
     }
 }
 

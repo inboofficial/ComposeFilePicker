@@ -19,6 +19,8 @@ val sourcesJar = tasks.register("sourcesJar", Jar::class) {
 
 
 val javadoc = tasks.register("javadoc", Javadoc::class) {
+    exclude("**/*.kt")
+    exclude("**/*.java")
     source = android.sourceSets["main"].java.getSourceFiles()
     classpath += project.files(android.bootClasspath)
 }
@@ -30,6 +32,10 @@ val javadocJar = tasks.register("javadocJar", Jar::class) {
     archiveClassifier.set("javadoc")
 }
 
+artifacts {
+    archives(javadoc)
+    archives(javadocJar)
+}
 
 publishing {
     publications {
@@ -105,7 +111,7 @@ artifactory {
 
 android {
     compileSdk = 32
-    buildToolsVersion = "30.0.3"
+    buildToolsVersion = "32.0.0"
 
     defaultConfig {
         minSdk= 17
