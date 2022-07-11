@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="droidninja.filepicker">
+    package="ir.inbo.libs.filepicker">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -16,7 +16,7 @@
 
         <provider
             android:name=".utils.FilePickerProvider"
-            android:authorities="${applicationId}.droidninja.filepicker.provider"
+            android:authorities="${applicationId}.ir.droidninja.filepicker.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
